@@ -7,7 +7,33 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>Another Online Calculator</h1>
-    <script src="calculator.js"></script>
+    <h1>Online Calculator</h1>
+    <div class="container-grid">
+        <div id="screen-container">
+            <div data-previous-op class="prev-op">123+</div>
+            <div data-current-op class="curr-op">456 </div>
+        </div>
+        <button data-clear class="clear">AC</button>
+        <button data-negative class="operation">+/-</button>
+        <button data-percent class="operation">%</button>
+        <button data-operation class="operation">÷</button>
+        <button data-number class="number">7</button>
+        <button data-number class="number">8</button>
+        <button data-number class="number">9</button>
+        <button data-operation class="operation">*</button>
+        <button data-number class="number">4</button>
+        <button data-number class="number">5</button>
+        <button data-number class="number">6</button>
+        <button data-operation class="operation">-</button>
+        <button data-number class="number">1</button>
+        <button data-number class="number">2</button>
+        <button data-number class="number">3</button>
+        <button data-operation class="operation">+</button>
+        <button data-number class="number">0</button>
+        <button data-number class="number">.</button>
+        <button data-delete class="delete">Del</button>
+        <button data-compute class="compute">=</button>
+    </div>
+    <script src="script.js"></script>
 </body>
 </html>

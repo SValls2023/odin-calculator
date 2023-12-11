@@ -1,0 +1,134 @@
+* *::before *::after {
+    box-sizing: border-box;
+    font-family: 'Gill Sans', 'Gill Sans MT', sans-serif;
+    font-weight: normal;
+}
+
+body {
+    height: 100%;
+    margin: 0;
+    background: linear-gradient(#80BAE5, #D5E4F6);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+h1 {
+    text-align: center;
+    margin: auto;
+    padding: 1.125rem;
+}
+
+.container-grid {
+    display: grid;
+    justify-content: center;
+    align-items: content;
+    min-height: 50vh;
+    padding: 2.5rem;
+    margin-left: 9.5rem;
+    margin-right: 9.5rem;
+    grid-template-columns: repeat(4, 90px);
+    grid-template-rows: minmax(90px, auto) repeat(5, 90px);
+    background-color: rgb(51, 51, 51);
+    box-shadow: 0px 6px 5px #000000;
+    border-radius: 10px;
+}
+
+.container-grid > #screen-container {
+    grid-column: 1 / -1;
+    background-color: rgb(74, 74, 74);
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-around;
+    flex-direction: column;
+    padding: 10px;
+    margin-bottom: 10px;
+    word-wrap: break-word;
+    word-break: break-all;
+    border: 2px solid black;
+    border-radius: 15px;
+    outline: none;
+} 
+
+.container-grid > #screen-container > .prev-op{
+    color: #ced3d6;
+    font-size: 1.375rem;
+} 
+
+.container-grid > #screen-container > .curr-op{
+    color: #ffffff;
+    font-size: 1.75rem;
+} 
+
+.container-grid > button {
+    cursor: pointer;
+    font-size: 1.25rem;
+    border: 1.35px solid black;
+    outline: none;
+    color: white;
+}
+
+.container-grid > button:first-of-type {
+    border-radius: 5px 0 0 0;
+}
+
+.container-grid > button:nth-child(5) {
+    border-radius: 0 5px 0 0;
+}
+
+.container-grid > button:nth-child(18) {
+    border-radius: 0 0 0 5px;
+}
+
+.container-grid > button:last-of-type {
+    border-radius: 0 0 5px 0;
+}
+
+.container-grid > .number, .delete {
+    background-color: rgb(108, 154, 140);
+}
+
+.container-grid > .number:hover, .delete:hover {
+    background-color: rgb(118, 167, 152);
+}
+
+.container-grid > .number:active, .delete:active {
+    background-color: rgb(127, 168, 165);
+}
+
+.container-grid > .compute {
+    background-color: rgb(132, 111, 170);
+}
+
+.container-grid > .compute:hover {
+    background-color: rgb(139, 116, 180);
+}
+
+.container-grid > .compute:active {
+    background-color: rgb(148, 123, 193);
+}
+
+.container-grid > .operation {
+    background-color: rgb(169, 138, 226);
+}
+
+.container-grid > .operation:hover {
+    background-color: rgb(176, 144, 235);
+}
+
+.container-grid > .operation:active {
+    background-color: rgb(184, 150, 246);
+}
+
+.container-grid > .clear {
+    background-color: rgb(120, 84, 153);
+}
+
+.container-grid > .clear:hover {
+    background-color: rgb(130, 95, 163);
+}
+
+.container-grid > .clear:active {
+    background-color: rgb(146, 107, 183);
+}
+
+
