@@ -22,11 +22,16 @@
     },
 
     this.chooseOperation = function(operation) {
-        if(this.currOperand === '') return;
-        if (this.prevOperand !== '') this.compute();
-        this.operation = operation;
-        this.prevOperand = this.currOperand;
-        this.currOperand = '';
+        if(this.currOperand === '' && this.prevOperand === '') return;
+        if (this.prevOperand !== '' && this.currOperand !== '') this.compute();
+        if(this.currOperand === '' && this.prevOperand !== '') {
+            console.log('test');
+            this.operation = operation
+        } else {
+            this.operation = operation;
+            this.prevOperand = this.currOperand;
+            this.currOperand = '';
+        }
     },
 
     this.compute = function() {
