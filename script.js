@@ -14,6 +14,9 @@
 
     this.delete = function() {
         this.currOperand = this.currOperand.toString().slice(0, -1);
+        if (isNaN(this.currOperand)) {
+            this.currOperand = '';
+        }
     },
 
     this.appendNumber = function(number) {
@@ -21,11 +24,19 @@
         this.currOperand = this.currOperand.toString() + number.toString();
     },
 
+    this.negateNumber = function() {
+        if (this.currOperand === '') return;
+        if (this.currOperand.toString().includes('-')) {
+            this.currOperand = this.currOperand.toString().slice(1, this.currOperand.toString().length);
+        } else {
+            this.currOperand = '-' + this.currOperand.toString();
+        }
+    }
+
     this.chooseOperation = function(operation) {
         if(this.currOperand === '' && this.prevOperand === '') return;
         if (this.prevOperand !== '' && this.currOperand !== '') this.compute();
         if(this.currOperand === '' && this.prevOperand !== '') {
-            console.log('test');
             this.operation = operation
         } else {
             this.operation = operation;
@@ -105,6 +116,7 @@ const prevOperandText = document.querySelector('[data-previous-op]');
 const currOperandText = document.querySelector('[data-current-op]');
 const numBtn = document.querySelectorAll('[data-number]');
 const operationBtn = document.querySelectorAll('[data-operation]');
+const negativeBtn = document.querySelector('[data-negative]');
 const deleteBtn = document.querySelector('[data-delete]');
 const clearBtn = document.querySelector('[data-clear]');
 const computeBtn = document.querySelector('[data-compute');
@@ -123,6 +135,11 @@ operationBtn.forEach(button => {
         calc.chooseOperation(button.innerHTML);
         calc.updateDisplay();
     })
+})
+
+negativeBtn.addEventListener('click', () => {
+    calc.negateNumber();
+    calc.updateDisplay();
 })
 
 computeBtn.addEventListener('click', () => {
