@@ -21,7 +21,14 @@
 
     this.appendNumber = function(number) {
         if(number === '.' && this.currOperand.toString().includes('.')) return;
-        this.currOperand = this.currOperand.toString() + number.toString();
+        if(this.currOperand.toString().includes('%')) {
+            const index = this.currOperand.toString().indexOf('%');
+            this.currOperand = this.currOperand.toString().slice(0, index) + 
+                               number.toString() +
+                               this.currOperand.toString().slice(index);
+        } else {
+            this.currOperand = this.currOperand.toString() + number.toString();
+        }
     },
 
     this.negateNumber = function() {
@@ -33,9 +40,14 @@
         }
     }
 
+    this.appendPercentage = function () {
+        if (this.currOperand === '') return;
+        this.currOperand = this.currOperand.toString() + '%';
+    },
+
     this.chooseOperation = function(operation) {
         if(this.currOperand === '' && this.prevOperand === '') return;
-        if (this.prevOperand !== '' && this.currOperand !== '') this.compute();
+        if (this.currOperand !== '' && this.prevOperand !== '') this.compute();
         if(this.currOperand === '' && this.prevOperand !== '') {
             this.operation = operation
         } else {
@@ -97,6 +109,10 @@
         if (decimalDigits != null) {
             return `${integerDisplay}.${decimalDigits}`;
         } else {
+            if (stringNumber.includes('%')) {
+                const index = stringNumber.indexOf('%');
+                integerDisplay = integerDisplay + stringNumber.slice(index);
+            }
             return integerDisplay;
         }
     },
@@ -117,28 +133,36 @@ const currOperandText = document.querySelector('[data-current-op]');
 const numBtn = document.querySelectorAll('[data-number]');
 const operationBtn = document.querySelectorAll('[data-operation]');
 const negativeBtn = document.querySelector('[data-negative]');
+const percentBtn = document.querySelector('[data-percent]');
 const deleteBtn = document.querySelector('[data-delete]');
 const clearBtn = document.querySelector('[data-clear]');
 const computeBtn = document.querySelector('[data-compute');
 
+/* Calculator Object Declaration */
 const calc = new Calculator(prevOperandText, currOperandText);
 
+/* Calulator Button Event Listeners */
 numBtn.forEach(button => {
     button.addEventListener('click', () => {
         calc.appendNumber(button.innerHTML);
         calc.updateDisplay();
-    })
-})
+    });
+});
 
 operationBtn.forEach(button => {
     button.addEventListener('click', () => {
         calc.chooseOperation(button.innerHTML);
         calc.updateDisplay();
-    })
-})
+    });
+});
 
 negativeBtn.addEventListener('click', () => {
     calc.negateNumber();
+    calc.updateDisplay();
+});
+
+percentBtn.addEventListener('click', () => {
+    calc.appendPercentage();
     calc.updateDisplay();
 })
 
