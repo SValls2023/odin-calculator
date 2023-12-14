@@ -14,7 +14,7 @@
 
     this.delete = function() {
         this.currOperand = this.currOperand.toString().slice(0, -1);
-        if (isNaN(this.currOperand)) {
+        if (this.currOperand.toString().length <= 1 && isNaN(this.currOperand)) {
             this.currOperand = '';
         }
     },
@@ -59,8 +59,10 @@
 
     this.compute = function() {
         let answer;
-        const a = parseFloat(this.prevOperand);
-        const b = parseFloat(this.currOperand);
+        let a = parseFloat(this.prevOperand);
+        a = this.convertPercentage(a, this.prevOperand);
+        let b = parseFloat(this.currOperand);
+        b = this.convertPercentage(b, this.currOperand);
         if (isNaN(a) || isNaN(b)) return;
         switch(this.operation) {
             case '*':
@@ -78,9 +80,6 @@
             default:
                 return;
         }
-        if(this.countDecimals(answer) > 5) {
-            answer = answer.toPrecision(5);
-        }
         this.currOperand = answer;
         this.operation = undefined;
         this.prevOperand = '';
@@ -94,6 +93,16 @@
         } else {
             return 0;
         }
+    },
+
+    this.convertPercentage = function(number, operand) {
+        if(!operand.toString().includes('%')) return number;
+        const index = operand.indexOf('%');
+        const percentSlice = operand.slice(index);
+        for (let i = 0; i < percentSlice.length; i++) {
+            number /= 100;
+        }
+        return number;
     },
 
     this.getDisplayNumber = function(number) {
