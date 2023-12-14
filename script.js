@@ -5,11 +5,13 @@
     this.currOperand = '',
     this.prevOperand = '',
     this.operation = undefined,
+    this.lastComputation = '',
 
     this.clear = function() {
         this.currOperand = '';
         this.prevOperand = '';
         this.operation = undefined;
+        this.lastComputation = '';
     },
 
     this.delete = function() {
@@ -20,8 +22,13 @@
     },
 
     this.appendNumber = function(number) {
-        if(number === '.' && this.currOperand.toString().includes('.')) return;
-        if(this.currOperand.toString().includes('%')) {
+        if (this.currOperand === this.lastComputation && this.currOperand !== '') {
+            this.currOperand = number;
+            this.lastComputation = '';
+            return;
+        }
+        if (number === '.' && this.currOperand.toString().includes('.')) return;
+        if (this.currOperand.toString().includes('%')) {
             const index = this.currOperand.toString().indexOf('%');
             this.currOperand = this.currOperand.toString().slice(0, index) + 
                                number.toString() +
@@ -81,6 +88,7 @@
                 return;
         }
         this.currOperand = answer;
+        this.lastComputation = answer;
         this.operation = undefined;
         this.prevOperand = '';
     },
